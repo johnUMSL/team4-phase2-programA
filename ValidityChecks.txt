@@ -1,0 +1,4 @@
+BenjaminGeorgeLog.csv - Line 1: A valid file starts with 2 strings seperated by a comma.
+ChallahFredLog.csv: VALID
+MazelMitziLog.csv - Line 2: Course code must be CS 4500.
+ThomasJackLog.csv: A valid file CANNOT be empty.

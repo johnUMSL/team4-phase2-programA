@@ -25,46 +25,48 @@ def find_csv_files():
 # If any case insensitive "XLog.csv" files are found, create or open a file for writing
 def create_validity_file(valid_named_files):
   if len(valid_named_files) > 0:
-    with open("ValidityChecks.txt", "w") as validityCheckFile: # Resource #2
-      return validityCheckFile
+    with open("ValidityChecks.txt", "w") as file: # Resource #2
+      return file
+
+# Append errors to validity check .txt file
+def write_errors_to_file(errors):
+  with open("ValidityChecks.txt", "w") as file:
+    for error in errors:
+      print(error)
+      file.write(f"{error}\n")
 
 # Function to validate the contents of the CSV file
 def validate_csv_files(valid_csv_files):
   name_regex_pattern = "[A-Z][a-z]*,[A-Z][a-z]*" # Capture regex to match format "Lastname,Firstname". Resource #4
+  errors_in_files =[] # Empty list to store formatting errors in CSV files
 
   for valid_csv_file in valid_csv_files:
-    
-    name_in_line = [] # Empty list to store name information
+    filename = os.path.basename(valid_csv_file)
     course_in_line = [] # Empty list to store course code information
-    
+      
     try:
       with open(valid_csv_file, 'r') as file:
         lines = file.readlines() # Read all lines from the CSV file
     except:
-      raise Exception("CSV File is not formatted correctly.")
-    
-    # Ensure the CSV file has at least two lines (name and class ID)
-    if len(lines) < 2:
-      raise Exception("There should be at least two lines of data in the CSV file.")
+      raise Exception("Unable to open CSV file.")
+
+    # Ensure the CSV file is not empty
+    if len(lines) == 0:
+      errors_in_files.append(f"{filename}: A valid file CANNOT be empty.")
     
     # Validate the first line with name_regex_pattern. Resource #6
-    if re.match(name_regex_pattern, lines[0]):
-      # Split the first line by commas, add non-empty, stripped values to name_in_line list
-      for data in lines[0].split(','):
-        data = data.strip()
-        if data:
-          name_in_line.append(data)
-      print(f"\nLast Name, First Name: {name_in_line[0]}, {name_in_line[1]}") # Output last and first name from name_in_line list
-    else:
-      raise Exception("The name data in the CSV file is not formatted correctly.") # Raise an exception if the name format is incorrect
-    
-    # Validate the second line with COURSE_CODE from constants "CS 4500". 
-    if re.match(COURSE_CODE, lines[1]):
+    elif len(lines) > 0 and re.match(name_regex_pattern, lines[0], flags=re.I) is None:
+      errors_in_files.append(f"{filename} - Line 1: A valid file starts with 2 strings seperated by a comma.")
+
+    # Validate the second line with constant.COURSE_CODE. 
+    elif len(lines) > 1:
       for data in lines[1].split(','):
         data = data.strip()
         if data:
           course_in_line.append(data)
-      print(f"Class ID: {course_in_line[0]}\n")
-    else:
-      raise Exception("The Class ID data in the CSV file is not formatted correctly.")
+      if course_in_line[0] != COURSE_CODE:
+        errors_in_files.append(f"{filename} - Line 2: Course code must be CS 4500.")
+      else:
+        errors_in_files.append(f"{filename}: VALID")
+  return errors_in_files
     

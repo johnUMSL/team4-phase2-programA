@@ -4,7 +4,7 @@
 
 from constants import SUMMARY
 from helpers import readyToContinue, clear_console
-from csv_functions import find_csv_files, create_validity_file, validate_csv_files
+from csv_functions import find_csv_files, create_validity_file, validate_csv_files, write_errors_to_file
 
 def main():
   clear_console() # clear the console
@@ -13,7 +13,9 @@ def main():
 
   files_matching_pattern = find_csv_files() 
   create_validity_file(files_matching_pattern)
-  validate_csv_files(files_matching_pattern)
+  
+  errors = validate_csv_files(files_matching_pattern)
+  write_errors_to_file(errors)
 
   
 
