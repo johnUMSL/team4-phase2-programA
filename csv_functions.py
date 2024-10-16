@@ -2,6 +2,7 @@ import os # operating system import
 import re # regular expression import
 from pathlib import Path # filesystem path import
 from constants import COURSE_CODE
+from activity_log_functions import validate_activity_log_entries
 
 
 # Function to find a correctly formatted CSV file in the current directory
@@ -37,7 +38,7 @@ def write_errors_to_file(errors):
 
 # Function to validate the contents of the CSV file
 def validate_csv_files(valid_csv_files):
-  name_regex_pattern = "[A-Z][a-z]*,[A-Z][a-z]*" # Capture regex to match format "Lastname,Firstname". Resource #4
+  name_regex_pattern = "[A-Z][a-z]*,[A-Z][a-z]*" # Capture regex to match format "Lastname,Firstname". 
   errors_in_files =[] # Empty list to store formatting errors in CSV files
 
   for valid_csv_file in valid_csv_files:
@@ -54,19 +55,23 @@ def validate_csv_files(valid_csv_files):
     if len(lines) == 0:
       errors_in_files.append(f"{filename}: A valid file CANNOT be empty.")
     
-    # Validate the first line with name_regex_pattern. Resource #6
-    elif len(lines) > 0 and re.match(name_regex_pattern, lines[0], flags=re.I) is None:
+    # Validate the first line with name_regex_pattern. 
+    elif len(lines) > 0 and re.match(name_regex_pattern, lines[0], flags=re.I) is None: # Resource #1
       errors_in_files.append(f"{filename} - Line 1: A valid file starts with 2 strings seperated by a comma.")
 
     # Validate the second line with constant.COURSE_CODE. 
-    elif len(lines) > 1:
+    elif len(lines) > 1 and len(lines) < 3:
       for data in lines[1].split(','):
         data = data.strip()
         if data:
           course_in_line.append(data)
       if course_in_line[0] != COURSE_CODE:
         errors_in_files.append(f"{filename} - Line 2: Course code must be CS 4500.")
-      else:
-        errors_in_files.append(f"{filename}: VALID")
+    
+    if len(lines) > 2:
+      for line_number, line in enumerate(lines[2:], start=3): # Resource #2 and Resource #3
+        if validate_activity_log_entries(line, line_number, filename, errors_in_files) == False:
+          return errors_in_files
+
   return errors_in_files
     
