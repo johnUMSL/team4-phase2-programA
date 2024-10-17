@@ -1,3 +1,2 @@
 BenjaminGeorgeLog.csv - Line 1: A valid file starts with 2 strings seperated by a comma.
-MazelMitziLog.csv - Line 2: Course code must be CS 4500.
-TeddyJetLog.csv - 3: Date is not formatted correctly.
+ChallahFredLog.csv - 3: Start time is not formatted correctly.

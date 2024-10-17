@@ -17,6 +17,9 @@ def main():
   readyToContinue() # wait for user to procedd by entering input
 
   files_matching_pattern = find_csv_files() 
+  for file in files_matching_pattern:
+    print(file)
+
   create_validity_file(files_matching_pattern)
   
   errors = validate_csv_files(files_matching_pattern)

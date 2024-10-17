@@ -37,22 +37,25 @@ def write_errors_to_file(errors):
       file.write(f"{error}\n")
 
 # Function to validate the contents of the CSV file
-def validate_csv_files(valid_csv_files):
+def validate_csv_files(valid_named_files):
   name_regex_pattern = "[A-Z][a-z]*,[A-Z][a-z]*" # Capture regex to match format "Lastname,Firstname". 
   errors_in_files =[] # Empty list to store formatting errors in CSV files
 
-  for valid_csv_file in valid_csv_files:
-    filename = os.path.basename(valid_csv_file)
+  for valid_named_file in valid_named_files:
+    filename = os.path.basename(valid_named_file)
+    print(filename)
     course_in_line = [] # Empty list to store course code information
-      
+    lines = []
+
     try:
-      with open(valid_csv_file, 'r') as file:
-        lines = file.readlines() # Read all lines from the CSV file
+      with open(valid_named_file, 'r') as file:
+        for line in file: # Read all lines from the CSV file
+          lines.append(line)
     except:
       raise Exception("Unable to open CSV file.")
 
     # Ensure the CSV file is not empty
-    if len(lines) == 0:
+    if len(lines) < 1:
       errors_in_files.append(f"{filename}: A valid file CANNOT be empty.")
     
     # Validate the first line with name_regex_pattern. 
@@ -68,8 +71,9 @@ def validate_csv_files(valid_csv_files):
       if course_in_line[0] != COURSE_CODE:
         errors_in_files.append(f"{filename} - Line 2: Course code must be CS 4500.")
     
+    # Validate all activity lof entries, starting on line #3
     if len(lines) > 2:
-      for line_number, line in enumerate(lines[2:], start=3): # Resource #2 and Resource #3
+      for line_number, line in enumerate(lines[2:], start=3): # Resource #3 and Resource #4
         if validate_activity_log_entries(line, line_number, filename, errors_in_files) == False:
           return errors_in_files
 

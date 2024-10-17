@@ -26,5 +26,10 @@ def validate_activity_log_entries(line, line_number, filename, errors_in_files: 
     errors_in_files.append(f"{filename} - {line_number}: Date is not formatted correctly.")
     return False
 
-    
+  # Make sure entered start and end times are valid and in the HH:MM 24 hour format
+  try:
+    start_time = datetime.strptime(data_points[1], '%H:%M')
+  except ValueError:
+    errors_in_files.append(f"{filename} - {line_number}: Start time is not formatted correctly.")
+    return False  
 
