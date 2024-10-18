@@ -27,7 +27,7 @@ def find_csv_files():
 def create_validity_file(valid_named_files):
   if len(valid_named_files) > 0:
     with open("ValidityChecks.txt", "w") as file: # Resource #2
-      return file
+      return
 
 # Append errors to validity check .txt file
 def write_errors_to_file(errors):
@@ -43,39 +43,46 @@ def validate_csv_files(valid_named_files):
 
   for valid_named_file in valid_named_files:
     filename = os.path.basename(valid_named_file)
-    print(filename)
     course_in_line = [] # Empty list to store course code information
-    lines = []
+    file_has_errors = False
 
     try:
       with open(valid_named_file, 'r') as file:
-        for line in file: # Read all lines from the CSV file
-          lines.append(line)
+        lines = file.readlines() # Read all lines from the CSV file
+
     except:
       raise Exception("Unable to open CSV file.")
-
+ 
     # Ensure the CSV file is not empty
     if len(lines) < 1:
-      errors_in_files.append(f"{filename}: A valid file CANNOT be empty.")
-    
+      errors_in_files.append(f"{filename}:INVALID - This file is empty.")
+      file_has_errors = True
+
     # Validate the first line with name_regex_pattern. 
     elif len(lines) > 0 and re.match(name_regex_pattern, lines[0], flags=re.I) is None: # Resource #1
-      errors_in_files.append(f"{filename} - Line 1: A valid file starts with 2 strings seperated by a comma.")
+      errors_in_files.append(f"{filename}:INVALID - Line 1: A valid file starts with 2 strings seperated by a comma.")
+      file_has_errors = True
 
     # Validate the second line with constant.COURSE_CODE. 
-    elif len(lines) > 1 and len(lines) < 3:
+    elif len(lines) >= 2:
       for data in lines[1].split(','):
         data = data.strip()
         if data:
           course_in_line.append(data)
       if course_in_line[0] != COURSE_CODE:
-        errors_in_files.append(f"{filename} - Line 2: Course code must be CS 4500.")
-    
+        errors_in_files.append(f"{filename}:INVALID - Line 2: Course code must be CS 4500.")
+        file_has_errors = True
+
     # Validate all activity lof entries, starting on line #3
     if len(lines) > 2:
       for line_number, line in enumerate(lines[2:], start=3): # Resource #3 and Resource #4
         if validate_activity_log_entries(line, line_number, filename, errors_in_files) == False:
-          return errors_in_files
+          file_has_errors = True
+          break
+
+    # Only append "VALID" if no errors were recorded for this file
+    if not file_has_errors:
+      errors_in_files.append(f"{filename}:VALID")
 
   return errors_in_files
     
