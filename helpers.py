@@ -1,6 +1,6 @@
 import os
 
-def clear_console(): # Resource #2
+def clear_console(): 
   if os.name == 'nt': #If the OS is Windows 
     os.system('cls') # runs the 'cls' command to clear screen
   else: # for Linux or macOS

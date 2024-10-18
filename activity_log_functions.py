@@ -49,7 +49,7 @@ def validate_activity_log_entries(line, line_number, filename, errors_in_files: 
   
 
   # Validate number of people entry. A number between 1 and 50 inclusive
-  if data_points[3].isdigit() == False or int(data_points[3]) < 1 or int(data_points[3]) > 50:
+  if data_points[3].isdigit() == False or int(data_points[3]) < 1 or int(data_points[3]) > 50: # Resource #9
     errors_in_files.append(f"{filename}:INVALID - Line {line_number}: The fourth item should be an integer between 1 and 50 inclusive.")
     return False
   

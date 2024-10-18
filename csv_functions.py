@@ -21,30 +21,31 @@ def find_csv_files():
   if not files_matching_pattern:
     raise Exception("There is no CSV file with the correctly formatted name.")
   
-  return files_matching_pattern
+  return files_matching_pattern # return the list of files with matching names
 
-# If any case insensitive "XLog.csv" files are found, create or open a file for writing
+# Create or open a file for writing
 def create_validity_file(valid_named_files):
-  if len(valid_named_files) > 0:
+  if len(valid_named_files) > 0: # If any case insensitive "XLog.csv" files are found
     with open("ValidityChecks.txt", "w") as file: # Resource #2
-      return
+      return # nothing to return, file will be created
 
-# Append errors to validity check .txt file
+# Append errors to validity check file
 def write_errors_to_file(errors):
-  with open("ValidityChecks.txt", "w") as file:
+  with open("ValidityChecks.txt", "w") as file: # Open file for writing
     for error in errors:
-      print(error)
-      file.write(f"{error}\n")
+      print(error) # Print each error to the console
+      file.write(f"{error}\n") # Write each error to the text file
 
 # Function to validate the contents of the CSV file
 def validate_csv_files(valid_named_files):
   name_regex_pattern = "[A-Z][a-z]*,[A-Z][a-z]*" # Capture regex to match format "Lastname,Firstname". 
   errors_in_files =[] # Empty list to store formatting errors in CSV files
 
+  # Loop through each file with a valid name
   for valid_named_file in valid_named_files:
-    filename = os.path.basename(valid_named_file)
+    filename = os.path.basename(valid_named_file) # extract filename from full path
     course_in_line = [] # Empty list to store course code information
-    file_has_errors = False
+    file_has_errors = False # flag used to track if errors are found in the file
 
     try:
       with open(valid_named_file, 'r') as file:
@@ -56,12 +57,12 @@ def validate_csv_files(valid_named_files):
     # Ensure the CSV file is not empty
     if len(lines) < 1:
       errors_in_files.append(f"{filename}:INVALID - This file is empty.")
-      file_has_errors = True
+      file_has_errors = True # Flag file for having errors
 
     # Validate the first line with name_regex_pattern. 
     elif len(lines) > 0 and re.match(name_regex_pattern, lines[0], flags=re.I) is None: # Resource #1
       errors_in_files.append(f"{filename}:INVALID - Line 1: A valid file starts with 2 strings seperated by a comma.")
-      file_has_errors = True
+      file_has_errors = True # Flag file for having errors
 
     # Validate the second line with constant.COURSE_CODE. 
     elif len(lines) >= 2:
@@ -71,18 +72,19 @@ def validate_csv_files(valid_named_files):
           course_in_line.append(data)
       if course_in_line[0] != COURSE_CODE:
         errors_in_files.append(f"{filename}:INVALID - Line 2: Course code must be CS 4500.")
-        file_has_errors = True
+        file_has_errors = True # Flag file for having errors
 
     # Validate all activity lof entries, starting on line #3
     if len(lines) > 2:
       for line_number, line in enumerate(lines[2:], start=3): # Resource #3 and Resource #4
         if validate_activity_log_entries(line, line_number, filename, errors_in_files) == False:
-          file_has_errors = True
+          file_has_errors = True # Flag file for having errors
           break
 
-    # Only append "VALID" if no errors were recorded for this file
+    # Only mark as VALID if no errors were found for this file
     if not file_has_errors:
       errors_in_files.append(f"{filename}:VALID")
 
-  return errors_in_files
+  # return the list of errors and valid status for all files
+  return errors_in_files 
     
