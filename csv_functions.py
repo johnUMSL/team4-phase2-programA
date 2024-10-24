@@ -9,7 +9,7 @@ from activity_log_functions import validate_activity_log_entries
 def find_csv_files():
   base_path = os.path.abspath(".")  # capture absolute path of the current directory, Resource #3
   csv_files = list(Path(base_path).glob("*.csv")) # List all CSV files in the directory using pathlib's glob method
-  regex_pattern = "[\w]*Log\.csv"  # Capture regex to match CSV file names in the format: "XLog.csv", Resource #4
+  regex_pattern = "[a-zA-z]*Log\.csv"  # Capture regex to match CSV file names in the format: "XLog.csv", Resource #4
   files_matching_pattern = [] # Empty list to store files that match the regex pattern
   
   # Loop over CSV files and check if they match the the case insensitive format: "XLog.csv"

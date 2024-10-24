@@ -1,6 +1,6 @@
 # Class: CS 4500, Phase 2A Program Name: team4-phase2-programA.py, Date: 10/03/2024, Last Modified: 10/18/2024
 # Programmed using Python 3.10.4, the development environment is Visual Studio Code.
-# Primarily programmed by John Garrett. Received Debugging assistance from Matthew Dobbs.
+# Primarily programmed by Lead Programmer John Garrett. Received debugging assistance from Matthew Dobbs.
 
 # Description of program:
 # This program checks multiple log files in the current directory, identifying CSV files that match the pattern XLog.csv. 
@@ -41,7 +41,7 @@ def main():
 
   files_matching_pattern = find_csv_files() 
   create_validity_file(files_matching_pattern)
-  
+
   errors = validate_csv_files(files_matching_pattern)
   write_errors_to_file(errors)
 
