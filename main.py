@@ -31,10 +31,14 @@
 # 9. https://stackoverflow.com/questions/40097590/detect-whether-a-python-string-is-a-number-or-a-letter
 
 from constants import SUMMARY, GOODBYE
+from log_entry import LogEntry
 from helpers import *
 from csv_functions import *
+from load_logs import load_activity_logs
+from test_print import print_main_data_struct
 
 def main():
+
   clear_console() # clear the console
   print(SUMMARY) # print the SUMMARY from constants.py
   readyToContinue() # wait for user to procedd by entering input
@@ -44,6 +48,10 @@ def main():
 
   errors = validate_csv_files(files_matching_pattern)
   write_errors_to_file(errors)
+
+  activity_logs_by_student: dict[str, list[LogEntry]] = load_activity_logs(files_matching_pattern)
+
+  print_main_data_struct(activity_logs_by_student)
 
   print(GOODBYE)
 

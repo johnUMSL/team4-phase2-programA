@@ -34,3 +34,11 @@ GOODBYE = """\nThank you for validating the your activity log files.
 The report has been saved to ValidityChecks.txt
 Goodbye.
 """
+
+#index values to access clearly elements in a log file row
+DATE_INDEX = 0
+START_TIME_INDEX = 1
+END_TIME_INDEX = 2
+GROUP_SIZE_INDEX = 3
+ACTIVITY_CODE_INDEX = 4
+NOTE_INDEX = 5
