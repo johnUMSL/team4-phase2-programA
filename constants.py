@@ -42,3 +42,6 @@ END_TIME_INDEX = 2
 GROUP_SIZE_INDEX = 3
 ACTIVITY_CODE_INDEX = 4
 NOTE_INDEX = 5
+#index values for headers (first row)
+FIRST_NAME_INDEX = 1
+LAST_NAME_INDEX = 0

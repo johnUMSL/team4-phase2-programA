@@ -1,5 +1,5 @@
 import csv
-from constants import DATE_INDEX, START_TIME_INDEX, END_TIME_INDEX, GROUP_SIZE_INDEX, ACTIVITY_CODE_INDEX, NOTE_INDEX
+from constants import FIRST_NAME_INDEX,LAST_NAME_INDEX,DATE_INDEX, START_TIME_INDEX, END_TIME_INDEX, GROUP_SIZE_INDEX, ACTIVITY_CODE_INDEX, NOTE_INDEX
 from log_entry import LogEntry
 #parses all valid csv files
 #collects username from header to create dictionary key 
@@ -12,8 +12,8 @@ def load_activity_logs(file_paths: list) -> dict[str, list[LogEntry]]:
        file_reader_obj = csv.reader(file)
        username: list[str] = next(file_reader_obj) #https://stackoverflow.com/questions/14551484/trying-to-understand-python-csv-next
        course = next(file_reader_obj) #just iterating over, not doing anything with course here
-       first_name = username[0]
-       last_name = username[1]
+       first_name = username[FIRST_NAME_INDEX]
+       last_name = username[LAST_NAME_INDEX]
        full_name_key = first_name + " " + last_name
        results[full_name_key] = read_student_log_entries(file_reader_obj)
 
