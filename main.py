@@ -1,15 +1,16 @@
-# Class: CS 4500, Phase 2A Program Name: team4-phase2-programA.py, Date: 10/03/2024, Last Modified: 10/18/2024
+# Class: CS 4500, Phase 3 Program Name: team4-phase2-programA.py, Date: 10/03/2024, Last Modified: 10/18/2024
 # Programmed using Python 3.10.4, the development environment is Visual Studio Code.
 # Primarily programmed by Lead Programmer John Garrett. Received debugging assistance from Matthew Dobbs.
 
 # Description of program:
-# This program checks multiple log files in the current directory, identifying CSV files that match the pattern XLog.csv. 
-# It ensures files are not empty, validates that the first line contains a last name and first name, and that the second line 
-# has the course code CS 4500. For time entries, the program checks if dates and times are valid, and that additional details, 
-# like activity codes and notes, meet specific criteria.
-# If a time entry exceeds four hours, a warning is issued, though the file is not invalidated. 
-# The program generates a report both on-screen and in a text file (ValidityChecks.txt), indicating whether each file is valid or, 
-# if not, the first error found. After all files are checked, it prints a final report and closes with a goodbye message.
+# This program processes time logs for a team. It starts by checking if the correct number
+# of time log files are present (between 2 and 10). It stops and shows an error if there are too few, too many, 
+# or if any files have duplicate names. It then verifies that each file is valid and that the names inside of
+# each file are unique. Next, it ensures all logs share the same Class ID, halting with an error if there are
+# differnces. If there the correct number of files, and all are valid, the program collects data from the
+# time logs to generate and display reports and graphs. These reports are saved as text files. 
+# Graphs are shown one at a time, pausing for user input before moving on. The program then ends with a
+# goodbye message.
 
 # Build instructions: 
 # To compile and build an executable file for this program, make sure you have pyinstaller in your virtual environment.
@@ -40,10 +41,12 @@ def main():
   readyToContinue() # wait for user to procedd by entering input
 
   files_matching_pattern = find_csv_files() 
-  create_validity_file(files_matching_pattern)
+  # create_validity_file(files_matching_pattern)
 
-  errors = validate_csv_files(files_matching_pattern)
-  write_errors_to_file(errors)
+  valid_files = validate_csv_files(files_matching_pattern)
+  for valid_file in valid_files:
+    print(valid_file)
+  # write_errors_to_file(errors)
 
   print(GOODBYE)
 
