@@ -9,7 +9,7 @@ from activity_log_functions import validate_activity_log_entries
 def find_csv_files():
   base_path = os.path.abspath(".")  # capture absolute path of the current directory, Resource #3
   csv_files = list(Path(base_path).glob("*.csv")) # List all CSV files in the directory using pathlib's glob method
-  regex_pattern = "[a-zA-z]*Log\.csv"  # Capture regex to match CSV file names in the format: "XLog.csv", Resource #4
+  regex_pattern = "[A-Z][a-z]*[A-Z][a-z]*Log\.csv" # Capture regex to match CSV file names in the format: "LastnameFirstnameLog.csv", Resource #4
   files_matching_pattern = [] # Empty list to store files that match the regex pattern
   
   # Loop over CSV files and check if they match the the case insensitive format: "XLog.csv"
@@ -17,15 +17,19 @@ def find_csv_files():
     if re.match(regex_pattern, file.name, flags=re.I): # Resource #1
       files_matching_pattern.append(file) # Append the file if it matches the format "LastnameFirstname.csv"
   
-  # Raise an exception if no case insensitive "XLog.csv" files are found
+  # Raise an exception if zero, one, or more than 10 "LastnameFirstnameLog.csv" files are found
   if not files_matching_pattern:
     raise Exception("There is no CSV file with the correctly formatted name.")
-  
-  return files_matching_pattern # return the list of files with matching names
+  elif len(files_matching_pattern) == 1:
+    raise Exception("There is only one CSV file with the correctly formatted name.")
+  elif len(files_matching_pattern) > 10:
+    raise Exception("There are more than 10 CSV fileswith the correctly formatted name.")
+  else:
+    return files_matching_pattern # return the list of files with matching names
 
 # Create or open a file for writing
 def create_validity_file(valid_named_files):
-  if len(valid_named_files) > 0: # If any case insensitive "XLog.csv" files are found
+  if len(valid_named_files) > 0: # If any case insensitive "LastnameFirstnameLog.csv" files are found
     with open("ValidityChecks.txt", "w") as file: # Resource #2
       return # nothing to return, file will be created
 

@@ -7,6 +7,6 @@ dist/
 venv/
 
 *.spec
-*.csv
+// *.csv
 
 *.txt
