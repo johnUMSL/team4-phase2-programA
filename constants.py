@@ -1,11 +1,14 @@
 # Constants used in the activity log program.
 
 # A description of the program 
-SUMMARY = """\nThis program validates internal log files. It first checks for properly formatted file names
-(XLog.csv - where X is a string of alphabetic characters), then checks for properly formatted file contents. 
-The program outputs errors and/or incorrect formats to an external report file and to the screen. 
-After the program processes all the files with a valid filename, the program outputs a final report
-and halts with a goodbye message.
+SUMMARY = """\nThis program processes time logs for a team. It starts by checking if the correct number
+of time log files are present (between 2 and 10). It stops and shows an error if there are too few, too many, 
+or if any files have duplicate names. It then verifies that each file is valid and that the names inside of
+each file are unique. Next, it ensures all logs share the same Class ID, halting with an error if there are
+differnces. If there the correct number of files, and all are valid, the program collects data from the
+time logs to generate and display reports and graphs. These reports are saved as text files. 
+Graphs are shown one at a time, pausing for user input before moving on. The program then ends with a
+goodbye message.
 """
 
 # Course Code
@@ -30,8 +33,9 @@ ACTIVITY_CODES = {
 }
 
 # Goodbye message
-GOODBYE = """\nThank you for validating the your activity log files.
-The report has been saved to ValidityChecks.txt
+GOODBYE = """\nThank you for validating your activity log files
+before generating your reports.
+Your reports have been saved as .txt files.
 Goodbye.
 """
 

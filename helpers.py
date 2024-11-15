@@ -11,5 +11,5 @@ def readyToContinue():
   while user_input.lower() != 'y': # Prompt user for input until 'Y' or 'y' is entered
     print("Invalid entry.")
     user_input = input("Please enter 'y' or 'Y' when ready to continue.\n")
-  print("Generating ValidityChecks.txt File.....\n") # Once valid input is entered, print statement and continue
-  print("The contents of ValidityChecks.txt are printed below.\n")
+  print("\nValidating number of log files and log file names.....\n") # Once valid input is entered, print statement and continue
+ 
