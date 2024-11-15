@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from constants import ACTIVITY_CODES
 
 def validate_activity_log_entries(line, line_number, filename, errors_in_files: list): # Resource #5
@@ -51,7 +51,6 @@ def validate_activity_log_entries(line, line_number, filename, errors_in_files: 
   if data_points[4] == "D" and not data_points[5].strip():
     raise Exception(f"{filename}: INVALID - Line {line_number}: A Note is Required.")
 
-  
   # Validate note contains no commas
   if len(data_points) > 6:
     errors_in_files.append(f"{filename}:INVALID - Line {line_number}: Notes cannot contain a comma.")

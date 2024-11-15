@@ -1,6 +1,6 @@
 # Class: CS 4500, Phase 3 Program Name: team4-phase2-programA.py, Date: 10/03/2024, Last Modified: 10/18/2024
 # Programmed using Python 3.10.4, the development environment is Visual Studio Code.
-# Primarily programmed by Lead Programmer John Garrett. Received debugging assistance from Matthew Dobbs.
+# Programmed by John Garrett, Connor Gilmore, and Matthew Dobbs.
 
 # Description of program:
 # This program processes time logs for a team. It starts by checking if the correct number
@@ -38,15 +38,13 @@ from csv_functions import *
 def main():
   clear_console() # clear the console
   print(SUMMARY) # print the SUMMARY from constants.py
-  readyToContinue() # wait for user to procedd by entering input
+  readyToContinue() # wait for user to proceed by entering input
 
   files_matching_pattern = find_csv_files() 
-  # create_validity_file(files_matching_pattern)
 
   valid_files = validate_csv_files(files_matching_pattern)
   for valid_file in valid_files:
     print(valid_file)
-  # write_errors_to_file(errors)
 
   print(GOODBYE)
 

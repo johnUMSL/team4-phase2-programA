@@ -26,19 +26,6 @@ def find_csv_files():
   else:
     return files_matching_pattern # return the list of files with matching names
 
-# Create or open a file for writing
-def create_validity_file(valid_named_files):
-  if len(valid_named_files) > 0: # If any case insensitive "LastnameFirstnameLog.csv" files are found
-    with open("ValidityChecks.txt", "w") as file: # Resource #2
-      return # nothing to return, file will be created
-
-# Append errors to validity check file
-def write_errors_to_file(errors):
-  with open("ValidityChecks.txt", "w") as file: # Open file for writing
-    for error in errors:
-      print(error) # Print each error to the console
-      file.write(f"{error}\n") # Write each error to the text file
-
 # Function to validate the contents of the CSV file
 def validate_csv_files(valid_named_files):
   print("Validating contents of each log file.....\n")
