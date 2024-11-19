@@ -38,6 +38,8 @@ from csv_functions import *
 from load_logs import load_activity_logs
 from test_print import print_main_data_struct
 
+from graphc import print_graph_c
+
 def main():
 
   clear_console() # clear the console
@@ -52,7 +54,9 @@ def main():
 
   activity_logs_by_student: dict[str, list[LogEntry]] = load_activity_logs(files_matching_pattern)
 
-  print_main_data_struct(activity_logs_by_student)
+  # print_main_data_struct(activity_logs_by_student)
+
+  print_graph_c(activity_logs_by_student)
 
   print(GOODBYE)
 
