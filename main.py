@@ -1,4 +1,4 @@
-# Class: CS 4500, Phase 3 Program Name: team4-phase2-programA.py, Date: 10/03/2024, Last Modified: 10/18/2024
+# Class: CS 4500, Phase 3 Program Name: team7-phase3, Date: 10/03/2024, Last Modified: 10/18/2024
 # Programmed using Python 3.10.4, the development environment is Visual Studio Code.
 # Programmed by John Garrett, Connor Gilmore, and Matthew Dobbs.
 
@@ -50,9 +50,9 @@ def main():
   for valid_file in valid_files:
     print(valid_file)
 
-  activity_logs_by_student: dict[str, list[LogEntry]] = load_activity_logs(files_matching_pattern)
+  ## activity_logs_by_student: dict[str, list[LogEntry]] = load_activity_logs(files_matching_pattern)
 
-  print_main_data_struct(activity_logs_by_student)
+  ## print_main_data_struct(activity_logs_by_student)
 
   print(GOODBYE)
 
