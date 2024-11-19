@@ -37,6 +37,7 @@ from helpers import *
 from csv_functions import *
 from load_logs import load_activity_logs
 from test_print import print_main_data_struct
+from validate_name_course_id import unique_name_check, class_id_check
 
 def main():
 
@@ -48,7 +49,12 @@ def main():
 
   valid_files = validate_csv_files(files_matching_pattern)
   for valid_file in valid_files:
-    print(valid_file)
+    print(f"{valid_file}: VALID")
+
+  unique_name_check(valid_files)
+  class_id_check(valid_files)
+
+
 
   ## activity_logs_by_student: dict[str, list[LogEntry]] = load_activity_logs(files_matching_pattern)
 
