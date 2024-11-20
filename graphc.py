@@ -1,6 +1,7 @@
 from datetime import datetime
 from log_entry import LogEntry
-import plotext as plot
+from helpers import readyToContinue
+import plotext as plot  # external dependency; must be installed
 import numpy as np
 
 def print_graph_c(activity_logs_by_student: dict[str, list[LogEntry]] ):
@@ -44,3 +45,5 @@ def print_graph_c(activity_logs_by_student: dict[str, list[LogEntry]] ):
   whole_y_ticks = np.arange(int(min(minutes)), int(max(minutes)))
   plot.yticks(whole_y_ticks)
   plot.show()
+
+  readyToContinue()
