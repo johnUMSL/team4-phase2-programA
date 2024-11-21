@@ -61,6 +61,7 @@ def main():
   ## print_main_data_struct(activity_logs_by_student)
 
   print(GOODBYE)
+  readyToContinue()
 
   
 
