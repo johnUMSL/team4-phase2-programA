@@ -38,7 +38,7 @@ from csv_functions import *
 from load_logs import load_activity_logs
 from test_print import print_main_data_struct
 from validate_name_course_id import unique_name_check, class_id_check
-
+from report_2 import generate_report2,calculate_activity_minutes
 def main():
 
   clear_console() # clear the console
@@ -56,9 +56,12 @@ def main():
 
 
 
-  ## activity_logs_by_student: dict[str, list[LogEntry]] = load_activity_logs(files_matching_pattern)
+  activity_logs_by_student: dict[str, list[LogEntry]] = load_activity_logs(files_matching_pattern)
 
   ## print_main_data_struct(activity_logs_by_student)
+  ## report-2 calculate each team memeber timespent by munites for each activityCode and generateReport 
+  activityMunites= calculate_activity_minutes(activity_logs_by_student)
+  print (generate_report2(activityMunites))
 
   print(GOODBYE)
 
