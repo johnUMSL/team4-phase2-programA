@@ -66,13 +66,14 @@ def meeting_overlap_validation(official_meeting: OfficialTeamMeeting):
                  print_lack_of_overlap_err(official_meeting, non_overlap_time, overlapped_minutes)
 
      official_meeting.set_time_meet(overlapped_minutes)
+#calculates time of meeting
 def total_meeting_time(s_time:str, e_time:str):
      start_hour,start_min = convert_time_to_hours_minutes(s_time)
      end_hour, end_min = convert_time_to_hours_minutes(e_time)
      s_minutes = time_to_minutes(start_hour,start_min)
      e_minutes = time_to_minutes(end_hour, end_min)
      return (e_minutes - s_minutes)
-
+#convert time hours and minutes
 def time_to_minutes(hour, minutes):
      return (hour * 60) + minutes
 #checks if more time was spent not collaborting then collaborting in a meeting      

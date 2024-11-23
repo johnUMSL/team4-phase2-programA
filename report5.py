@@ -27,7 +27,7 @@ def report5(activity_logs_by_student: dict[str, list[LogEntry]]):
     
     return
 
-#filters student;s log entries for only meeting activites (activity 4)
+#filters student's log entries for only meeting activites (activity 4)
 def filter_for_code4(activity_logs_by_student: dict[str, list[LogEntry]]):
 
     activity_4_logs_by_student: dict[str, list[LogEntry]] = {}
