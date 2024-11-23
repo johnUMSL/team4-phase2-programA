@@ -70,4 +70,4 @@ def validate_csv_files(valid_named_files):
 
   # return the list of valid activity log files
   return valid_files 
-    
+  
