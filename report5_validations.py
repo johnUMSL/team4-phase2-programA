@@ -1,5 +1,5 @@
 from typing import Tuple
-from constants import HOUR_INDEX, MINUTE_INDEX, MINUTES_IN_HOUR, ONLY_ONE_PERSON_IN_MEETING
+from report_5_consts import HOUR_INDEX, MINUTE_INDEX, MINUTES_IN_HOUR, ONLY_ONE_PERSON_IN_MEETING
 from report5_entities import OfficialTeamMeeting
 #converts 'HH:MM' string to a tuple of two ints    (hour_int, minute_int)
 #https://www.w3schools.com/python/python_tuples.asp

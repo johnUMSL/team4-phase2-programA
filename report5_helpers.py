@@ -1,6 +1,6 @@
 import decimal
 import copy
-from constants import EMPTY_LIST
+from report_5_consts import EMPTY_LIST
 from log_entry import LogEntry
 from report5_entities import MeetingEventBuilder, OfficialTeamMeeting, ReportedMeeting
 
