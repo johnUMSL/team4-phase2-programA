@@ -36,6 +36,7 @@ from log_entry import LogEntry
 from helpers import *
 from csv_functions import *
 from load_logs import load_activity_logs
+from report5 import report5
 from test_print import print_main_data_struct
 from validate_name_course_id import unique_name_check, class_id_check
 
@@ -59,6 +60,7 @@ def main():
   ## activity_logs_by_student: dict[str, list[LogEntry]] = load_activity_logs(files_matching_pattern)
 
   ## print_main_data_struct(activity_logs_by_student)
+  report5(load_activity_logs(files_matching_pattern))
 
   print(GOODBYE)
 
