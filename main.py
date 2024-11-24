@@ -54,16 +54,11 @@ def main():
   unique_name_check(valid_files)
   class_id_check(valid_files)
 
-
-
-  activity_logs_by_student: dict[str, list[LogEntry]] = load_activity_logs(files_matching_pattern)
-
-  ## print_main_data_struct(activity_logs_by_student)
+  ## activity_logs_by_student: dict[str, list[LogEntry]] = load_activity_logs(files_matching_pattern)
+  ## print_main_data_struct(activity_logs_by_student) 
   ## report-2 calculate each team memeber timespent by munites for each activityCode and generateReport 
-  activityMunites= calculate_activity_minutes(activity_logs_by_student)
-  print (generate_report2(activityMunites))
-
-  print(GOODBYE)
+  generate_report2(load_activity_logs(files_matching_pattern))
+  print(GOODBYE) 
 
   
 
