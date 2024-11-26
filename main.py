@@ -49,14 +49,11 @@
 #12. https://www.geeksforgeeks.org/using-else-conditional-statement-with-for-loop-in-python/
 #13. https://stackoverflow.com/questions/14472795/how-do-i-sort-a-list-of-datetime-or-date-objects
 from constants import SUMMARY, GOODBYE
-from log_entry import LogEntry
 from helpers import *
 from csv_functions import *
 from load_logs import load_activity_logs
-from report5 import report5
-from test_print import print_main_data_struct
 from validate_name_course_id import unique_name_check, class_id_check
-from report_3 import calculate_time_spent, compile_activity_log_data
+from report_3 import compile_activity_log_data, create_report_three
 
 def main():
 
@@ -73,12 +70,7 @@ def main():
   unique_name_check(valid_files)
   class_id_check(valid_files)
 
-  activity_logs_by_student: dict[str, list[LogEntry]] = load_activity_logs(files_matching_pattern)
-
-  print_main_data_struct(activity_logs_by_student)
-
-  print(compile_activity_log_data(load_activity_logs(files_matching_pattern)))
-  ## report5(load_activity_logs(files_matching_pattern))
+  create_report_three(compile_activity_log_data(load_activity_logs(files_matching_pattern)))
 
   print(GOODBYE)
 

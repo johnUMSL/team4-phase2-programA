@@ -1,5 +1,6 @@
 from datetime import datetime
-from log_entry import LogEntry
+import pandas as pd
+from tabulate import tabulate
 
 def calculate_time_spent(start_time, end_time):
   format = "%H:%M"
@@ -10,13 +11,23 @@ def calculate_time_spent(start_time, end_time):
 
 def compile_activity_log_data(activity_logs):
   data = {}
-  activity_minutes = {hex(i)[2:].upper(): 0 for i in range(14)}
   for student, log_entries in activity_logs.items():
     if student not in data:
       data[student] = {}
     for log_entry in log_entries:
       time_spent = calculate_time_spent(log_entry.start_time, log_entry.end_time)
-      if log_entry.activity_code not in activity_minutes:
-        activity_minutes[log_entry.activity_code] = 0
-      activity_minutes[log_entry.activity_code] += time_spent
-  return activity_minutes
+      if log_entry.activity_code not in data[student]:
+        data[student][log_entry.activity_code] = 0
+      data[student][log_entry.activity_code] += time_spent
+  return data
+
+def create_report_three(data, file='PhaseThreeReport4.txt'):
+  column_order = [hex(i)[2:].upper() for i in range(14)]
+  df = pd.DataFrame.from_dict(data, orient='index').fillna(0).astype(int)
+  df = df.reindex(columns=column_order, fill_value=0)
+  df.reset_index(inplace=True)
+  df.rename(columns={'index': 'Names'}, inplace=True)
+  with open(file, 'w') as f:
+    f.write(tabulate(df, headers='keys', tablefmt='grid', showindex=False))
+    print(f"Report saved to {file}")
+  return df
