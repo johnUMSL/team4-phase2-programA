@@ -59,6 +59,7 @@ from load_logs import load_activity_logs
 from validate_name_course_id import unique_name_check, class_id_check
 from report_2 import generate_report2
 from report_3 import compile_activity_log_data, create_report_three
+from report4 import report4
 from report5 import report5
 
 from graphc import print_graph_c
@@ -82,8 +83,10 @@ def main():
   generate_report2(load_activity_logs(files_matching_pattern))
 
   create_report_three(compile_activity_log_data(load_activity_logs(files_matching_pattern)))
-  
+  ## report 4: minutes worked by day of the week
+  report4(load_activity_logs(files_matching_pattern))
   report5(load_activity_logs(files_matching_pattern))
+  
   
   print_graph_c(load_activity_logs(files_matching_pattern))
   
