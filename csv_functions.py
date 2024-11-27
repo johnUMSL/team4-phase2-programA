@@ -66,8 +66,8 @@ def validate_csv_files(valid_named_files):
         validate_activity_log_entries(line, line_number, filename, valid_files)
         
     # Only mark as VALID if no errors were found for this file
-    valid_files.append(f"{filename}: VALID")
+    valid_files.append(filename)
 
   # return the list of valid activity log files
   return valid_files 
-    
+  
