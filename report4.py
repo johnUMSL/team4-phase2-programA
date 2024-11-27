@@ -4,12 +4,13 @@ import copy
 from log_entry import LogEntry
 import datetime 
 
+## Get Weekday from Date
 def check_weekday(date):
     month, day, year = (int(i) for i in date.split('/'))    
     the_date = datetime.date(year, month, day)
     day_of_week = the_date.weekday()  # Monday is 0 and Sunday is 6
     return day_of_week
-    
+## Get Minutes Spent Working
 def get_minutes(start_time, end_time):
     start_hour, start_minutes = (int(i) for i in start_time.split(':'))    
     end_hour, end_minutes = (int(i) for i in end_time.split(':'))
@@ -17,7 +18,7 @@ def get_minutes(start_time, end_time):
     return minutes
 
 def report4(activity_logs_by_student: dict[str, list[LogEntry]]):
-    print(f"Test")
+    ## Set up Weekday Data. Start at 0
     MondayMinutes = 0
     TuesdayMinutes = 0
     WednesdayMinutes = 0
@@ -25,10 +26,12 @@ def report4(activity_logs_by_student: dict[str, list[LogEntry]]):
     FridayMinutes = 0
     SaturdayMinutes = 0
     SundayMinutes = 0
+    ## Run through all data entries
     for key in activity_logs_by_student:
         for log_entry in activity_logs_by_student[key]:
             date = check_weekday(log_entry.date)
             minutes = get_minutes(log_entry.start_time,log_entry.end_time)
+            ## Add minutes to date data
             if (date == 0):
                 MondayMinutes += minutes
             if (date == 1):
@@ -43,6 +46,7 @@ def report4(activity_logs_by_student: dict[str, list[LogEntry]]):
                 SaturdayMinutes += minutes
             if (date == 6):
                 SundayMinutes += minutes
+    ## Write Entry and Data to file
     file = open("PhaseThreeReport4.txt", "w")
     file.write("Report 4: Minutes Worked by the Day of the Week\n")
     file.write("Class ID: CS 4500\n")
