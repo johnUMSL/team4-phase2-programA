@@ -57,8 +57,9 @@ from helpers import *
 from csv_functions import *
 from load_logs import load_activity_logs
 from validate_name_course_id import unique_name_check, class_id_check
-from report_2 import generate_report2,calculate_activity_minutes
+from report_2 import generate_report2
 from report_3 import compile_activity_log_data, create_report_three
+from report5 import report5
 
 def main():
 

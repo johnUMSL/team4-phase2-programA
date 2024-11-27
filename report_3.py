@@ -32,7 +32,7 @@ def compile_activity_log_data(activity_logs):
   return data
 
 # create a report in grid format and save it as a text file
-def create_report_three(data, file='PhaseThreeReport4.txt'):
+def create_report_three(data, file='PhaseThreeReport3.txt'):
   # create column order for the table: 1-9, A-D
   column_order = [hex(i)[2:].upper() for i in range(14)]
 
