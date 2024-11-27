@@ -48,6 +48,10 @@
 #11. https://www.w3schools.com/python/python_tuples.asp
 #12. https://www.geeksforgeeks.org/using-else-conditional-statement-with-for-loop-in-python/
 #13. https://stackoverflow.com/questions/14472795/how-do-i-sort-a-list-of-datetime-or-date-objects
+#14. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.from_dict.html
+#15. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.reindex.html
+#16. https://pypi.org/project/tabulate/
+
 from constants import SUMMARY, GOODBYE
 from helpers import *
 from csv_functions import *
