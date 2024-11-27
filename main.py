@@ -48,16 +48,22 @@
 #11. https://www.w3schools.com/python/python_tuples.asp
 #12. https://www.geeksforgeeks.org/using-else-conditional-statement-with-for-loop-in-python/
 #13. https://stackoverflow.com/questions/14472795/how-do-i-sort-a-list-of-datetime-or-date-objects
+#14. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.from_dict.html
+#15. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.reindex.html
+#16. https://pypi.org/project/tabulate/
+
 from constants import SUMMARY, GOODBYE
-from log_entry import LogEntry
 from helpers import *
 from csv_functions import *
 from load_logs import load_activity_logs
-from report5 import report5
-from report4 import report4
-from test_print import print_main_data_struct
 from validate_name_course_id import unique_name_check, class_id_check
-from report_2 import generate_report2,calculate_activity_minutes
+from report_2 import generate_report2
+from report_3 import compile_activity_log_data, create_report_three
+from report4 import report4
+from report5 import report5
+
+from graphc import print_graph_c
+
 def main():
 
   clear_console() # clear the console
@@ -72,18 +78,19 @@ def main():
 
   unique_name_check(valid_files)
   class_id_check(valid_files)
-
-  ## activity_logs_by_student: dict[str, list[LogEntry]] = load_activity_logs(files_matching_pattern)
-  ## report 4: minutes worked by day of the week
-  report4(load_activity_logs(files_matching_pattern))
-  ## print_main_data_struct(activity_logs_by_student)
-  report5(load_activity_logs(files_matching_pattern))
-   ## report-2 calculate each team memeber timespent by munites for each activityCode and generateReport 
+  
+  ## report-2 calculate each team memeber timespent by munites for each activityCode and generateReport 
   generate_report2(load_activity_logs(files_matching_pattern))
 
+  create_report_three(compile_activity_log_data(load_activity_logs(files_matching_pattern)))
+  ## report 4: minutes worked by day of the week
+  report4(load_activity_logs(files_matching_pattern))
+  report5(load_activity_logs(files_matching_pattern))
+  
+  
+  print_graph_c(load_activity_logs(files_matching_pattern))
   
   print(GOODBYE)
-  
 
 # entry point
 if __name__=='__main__':
