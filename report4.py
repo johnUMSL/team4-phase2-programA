@@ -2,6 +2,7 @@
 ## The Report will contain the days of the Week and how many minutes were worked durring thoses days for all the Logs combined.
 import copy
 from log_entry import LogEntry
+from tabulate import tabulate
 import datetime 
 
 ## Get Weekday from Date
@@ -56,19 +57,16 @@ def report4(activity_logs_by_student: dict[str, list[LogEntry]]):
     for key in activity_logs_by_student:
         file.write(key)
         file.write("\n")
-    file.write(f"\nDay of the Week: Total Team Minutes")
-    file.write(f"\nMonday:")
-    file.write(str(MondayMinutes))
-    file.write(f"\nTuesday:")
-    file.write(str(TuesdayMinutes))
-    file.write(f"\nWednesday:")
-    file.write(str(WednesdayMinutes))
-    file.write(f"\nThursday:")
-    file.write(str(ThursdayMinutes))
-    file.write(f"\nFriday:")
-    file.write(str(FridayMinutes))
-    file.write(f"\nSaturday:")
-    file.write(str(SaturdayMinutes))
-    file.write(f"\nSunday:")
-    file.write(str(SundayMinutes))
+    tabledata = [
+        ["Monday", MondayMinutes], 
+        ["Tuesday", TuesdayMinutes], 
+        ["Wendesday", WednesdayMinutes],
+        ["Thursday", ThursdayMinutes], 
+        ["Friday", FridayMinutes], 
+        ["Saturday", SaturdayMinutes],
+        ["Sunday", SundayMinutes]
+    ]
+    header = ["Day", "Minutes Worked"]
+    file.write(tabulate(tabledata, headers=header, tablefmt="grid"))
+
     file.close()
