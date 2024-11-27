@@ -4,6 +4,9 @@ import os
 import pandas as pd
 import numpy as np
 import plotext as plt
+from helpers import readyToContinue
+
+
 # importing plotext information from https://github.com/piccolomo/plotext/blob/master/readme/bar.md
 # information used for writing files from https://stackoverflow.com/questions/29223246/how-do-i-save-data-in-a-text-file-python
 
@@ -23,7 +26,7 @@ def report1():
             df = pd.read_csv(correct_file, header = None)
 
             if df.shape[1] >= 6:
-                name = str(df.iloc[0, 0])
+                name = str(df.iloc[0, 0] + ", " + df.iloc[0, 1])
 
                 try:
                     t1 = pd.to_datetime(df.iloc[:, 1], format='%H:%M', errors='coerce')
@@ -78,3 +81,5 @@ def report1():
     else:
         print("No valid data extracted")
         return None
+
+readyToContinue()
