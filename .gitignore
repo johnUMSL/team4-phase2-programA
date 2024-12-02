@@ -6,9 +6,10 @@ __pycache__/
 build/
 dist/
 venv/
+data/
 
 *.spec
-// *.csv
+*.csv
 
 *.txt
 
