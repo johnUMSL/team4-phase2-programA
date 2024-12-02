@@ -1,6 +1,8 @@
 from datetime import datetime
 import pandas as pd
 from tabulate import tabulate
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # alculate the time spent between a start time and an end time in minutes
 def calculate_time_spent(start_time, end_time):
@@ -55,13 +57,30 @@ def create_report_three(data, file='PhaseThreeReport3.txt'):
     "Report 3 contains the amount by time spent (in minutes) on each activity by each team member.\n\n"
     )
     f.write(tabulate(df, headers='keys', tablefmt='grid', showindex=False)) # Resource #16)
-    # file = open("PhaseThreeReport4.txt", "w")
-    # file.write("Report 4: Minutes Worked by the Day of the Week\n")
-    # file.write("Class ID: CS 4500\n")
-    # file.write("Team 7: Matthew Dobbs, John Garrett, Logan Bessinger, Connor Gilmore, Alewiya Duressa, and Aaron Graham.\n")
-    # file.write("The following is a report containing the days of the week and \nhow many minutes were worked each day by the people included in the Logs.\n")
-    # file.write("People Inckuded in the report:\n\n")
-    # write the table to the file using tabulate
- 
     print(f"Report saved to {file}")
+  return df
+
+# function to create and display graph b using dataframe from report 3clclear
+def create_graph_b(data: pd.DataFrame, title="Graph B", xlabel="Activity Codes", ylabel="Names"):
+  # set the 'Names' column as the index
+  data.set_index("Names", inplace=True)
+
+  # create a new figure set dimensions
+  plt.figure(figsize=(14,10))
+
+  # create a heatmap with a grid and shades of grren filling the cells. 
+  sns.heatmap(data, cmap="Greens", linewidths=0.5, cbar_kws={"label": "Minutes Spent"})
+  
+  # set title and labels font sizes
+  plt.title(title, fontsize=16)
+  plt.xlabel(xlabel, fontsize=12)
+  plt.ylabel(ylabel, fontsize=12)
+
+  # make both x and y axis labels horizontal without any rotations
+  plt.xticks(rotation=0)
+  plt.yticks(rotation=0)
+
+  # display the plotted heatmap
+  plt.show()
+
   return None

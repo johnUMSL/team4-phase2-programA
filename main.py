@@ -58,7 +58,7 @@ from csv_functions import *
 from load_logs import load_activity_logs
 from validate_name_course_id import unique_name_check, class_id_check
 from report_2 import generate_report2
-from report_3 import compile_activity_log_data, create_report_three
+from report_3 import compile_activity_log_data, create_report_three, create_graph_b
 from report4 import report4
 from report5 import report5
 
@@ -82,11 +82,16 @@ def main():
   ## report-2 calculate each team memeber timespent by munites for each activityCode and generateReport 
   generate_report2(load_activity_logs(files_matching_pattern))
 
-  create_report_three(compile_activity_log_data(load_activity_logs(files_matching_pattern)))
+  ## report 3: minutes worked on each activity by each team member. save reult into dataframe to be used in graph-b
+  df = create_report_three(compile_activity_log_data(load_activity_logs(files_matching_pattern)))
+  
   ## report 4: minutes worked by day of the week
   report4(load_activity_logs(files_matching_pattern))
+  
   report5(load_activity_logs(files_matching_pattern))
   
+  # graph-b: Same data as report 3, but displayed in a seaborn heatmap using shades of green instead of numerical data
+  create_graph_b(df)
   
   print_graph_c(load_activity_logs(files_matching_pattern))
   
