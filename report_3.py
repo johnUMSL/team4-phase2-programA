@@ -48,7 +48,20 @@ def create_report_three(data, file='PhaseThreeReport3.txt'):
 
   # Save the DataFrame to a file in a grid format using the tabulate library
   with open(file, 'w') as f:
+    f.write(
+    "Report 3: Minutes Spent on each Activity by Each Team Member\n"
+    "Class ID: CS 4500\n"
+    "Team 7: Matthew Dobbs, John Garrett, Logan Bessinger, Connor Gilmore, Alewiya Duressa, and Aaron Graham\n"
+    "Report 3 contains the amount by time spent (in minutes) on each activity by each team member.\n\n"
+    )
+    f.write(tabulate(df, headers='keys', tablefmt='grid', showindex=False)) # Resource #16)
+    # file = open("PhaseThreeReport4.txt", "w")
+    # file.write("Report 4: Minutes Worked by the Day of the Week\n")
+    # file.write("Class ID: CS 4500\n")
+    # file.write("Team 7: Matthew Dobbs, John Garrett, Logan Bessinger, Connor Gilmore, Alewiya Duressa, and Aaron Graham.\n")
+    # file.write("The following is a report containing the days of the week and \nhow many minutes were worked each day by the people included in the Logs.\n")
+    # file.write("People Inckuded in the report:\n\n")
     # write the table to the file using tabulate
-    f.write(tabulate(df, headers='keys', tablefmt='grid', showindex=False)) # Resource #16
+ 
     print(f"Report saved to {file}")
   return None
