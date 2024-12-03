@@ -57,6 +57,7 @@ from helpers import *
 from csv_functions import *
 from load_logs import load_activity_logs
 from validate_name_course_id import unique_name_check, class_id_check
+from report1 import report1
 from report_2 import generate_report2
 from report_3 import compile_activity_log_data, create_report_three, create_graph_b
 from report4 import report4
@@ -78,6 +79,9 @@ def main():
 
   unique_name_check(valid_files)
   class_id_check(valid_files)
+  
+  ## report-1 calculate the total minutes for each file in directory
+  report1()
   
   ## report-2 calculate each team memeber timespent by munites for each activityCode and generateReport 
   generate_report2(load_activity_logs(files_matching_pattern))
