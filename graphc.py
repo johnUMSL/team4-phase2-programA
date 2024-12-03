@@ -41,6 +41,7 @@ def print_graph_c(activity_logs_by_student: dict[str, list[LogEntry]] ):
   dates = list(sorted_minutes_by_date.keys())
   minutes = list(sorted_minutes_by_date.values())
 
+  plot.clear_figure()
   plot.bar(dates, minutes)
   plot.title("Graph C - Total Team Minutes by Date")
   plot.xlabel('Date')
