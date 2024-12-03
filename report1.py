@@ -2,16 +2,26 @@
 # Phase 3 Report 1 Total the minutes worked in each .csv file and save a .txt file with the name of each employee and their total minutes worked
 import os
 import pandas as pd
-import numpy as np
 import plotext as plt
-from helpers import readyToContinue
 
 
 
 # importing plotext information from https://github.com/piccolomo/plotext/blob/master/readme/bar.md
 # information used for writing files from https://stackoverflow.com/questions/29223246/how-do-i-save-data-in-a-text-file-python
+# using plotext to create a bar graph in terminal for the information that was extracted from the .csv files
+# changing the name of the x and y axis of the graph to be acurate to what they need to be.
 
+def generate_graph_a(dataframe):
+    #generate a bar graph for the information
+    x = dataframe['name'].tolist()
+    y = dataframe['time'].tolist()
 
+    # Setting the names and colors for the information
+    plt.bar(x, y, label="Graph A", color="red")
+    plt.title("Graph A")
+    plt.xlabel("Name")
+    plt.ylabel("Minutes Worked")
+    plt.show()
 
 def report1():
     # checking the validity of the files
@@ -25,7 +35,7 @@ def report1():
 
     for correct_file in correct_files:
         try:
-            df = pd.read_csv(correct_file, header = None)
+            df = pd.read_csv(correct_file, header=None)
 
             if df.shape[1] >= 6:
                 name = str(df.iloc[0, 0] + ", " + df.iloc[0, 1])
@@ -45,14 +55,14 @@ def report1():
 
                 working_data.append(pd.DataFrame({'name': [name], 'time': [final_time]}))
             else:
-                print(f"name and time columns not found in {correct_file}")
+                print(f"Name and time columns not found in {correct_file}")
 
         except Exception as e:
-            print(f"Error reading files {correct_file}: {e}")
-# createing the table that is then written into a .txt file
+            print(f"Error reading file {correct_file}: {e}")
+# creating the table that is then written into a .txt file
     if working_data:
         final_data = pd.concat(working_data, ignore_index=False)
-
+        final_data_graph = pd.concat(working_data, ignore_index=False)
         format = final_data.to_string(index=True, col_space=5, header=True)
         edges = "+" + "-" * (len(format.split("/n")[0]) - 2) + "|"
 
@@ -74,21 +84,11 @@ def report1():
             f.write(format_table)
 # message telling the user the name of the report file
         print(f"The report was saved to {file}")
-# using plotext to create a bar graph in terminal for the information that was extracted from the .csv files
-# changing the name of the x and y axis of the graph to be acurate to what they need to be.
-        x = final_data['name'].tolist()
-        y = final_data['time'].tolist()
-# setting the names and colors for the information
-        plt.bar(x, y, label = "Graph A", color = "red")
-        plt.title("Graph A")
-        plt.xlabel("Name")
-        plt.ylabel("Minutes Worked")
-        plt.show()
+
         print(final_data)
 
         return final_data
+
     else:
         print("No valid data extracted")
         return None
-
-readyToContinue()
