@@ -57,9 +57,9 @@ from helpers import *
 from csv_functions import *
 from load_logs import load_activity_logs
 from validate_name_course_id import unique_name_check, class_id_check
-from report1 import report1
+from report1 import report1, generate_graph_a
 from report_2 import generate_report2
-from report_3 import compile_activity_log_data, create_report_three, create_graph_b
+# from report_3 import compile_activity_log_data, create_report_three, create_graph_b
 from report4 import report4
 from report5 import report5
 
@@ -81,7 +81,7 @@ def main():
   class_id_check(valid_files)
   
   ## report-1 calculate the total minutes for each file in directory
-  report1()
+  data_report1 = report1()
   
   ## report-2 calculate each team memeber timespent by munites for each activityCode and generateReport 
   generate_report2(load_activity_logs(files_matching_pattern))
@@ -93,10 +93,13 @@ def main():
   report4(load_activity_logs(files_matching_pattern))
   
   report5(load_activity_logs(files_matching_pattern))
-  
+
+  # graph a: Show data from report 1 but displayed as a bar graph where the x axis is the names and the y axis is the minutes worked
+  generate_graph_a(data_report1)
+
   # graph-b: Same data as report 3, but displayed in a seaborn heatmap using shades of green instead of numerical data
   create_graph_b(df)
-  
+
   print_graph_c(load_activity_logs(files_matching_pattern))
   
   print(GOODBYE)
