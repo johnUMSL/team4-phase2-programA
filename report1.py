@@ -4,6 +4,8 @@ import os
 import pandas as pd
 import plotext as plt
 
+from helpers import readyToContinue
+
 
 
 # importing plotext information from https://github.com/piccolomo/plotext/blob/master/readme/bar.md
@@ -22,6 +24,9 @@ def generate_graph_a(dataframe):
     plt.xlabel("Name")
     plt.ylabel("Minutes Worked")
     plt.show()
+
+    readyToContinue()
+
 
 def report1():
     # checking the validity of the files
@@ -84,8 +89,6 @@ def report1():
             f.write(format_table)
 # message telling the user the name of the report file
         print(f"The report was saved to {file}")
-
-        print(final_data)
 
         return final_data
 

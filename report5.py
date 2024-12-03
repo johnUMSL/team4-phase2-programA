@@ -1,4 +1,5 @@
 import copy
+from helpers import readyToContinue
 from log_entry import LogEntry
 from report5_entities import MeetingEventBuilder, OfficialTeamMeeting, ReportedMeeting
 from report5_helpers import build_official_team_meeting, build_report, finalize_reports_for_meeting, merge_meetings, sorter_by_start_date_time
@@ -24,6 +25,8 @@ def report5(activity_logs_by_student: dict[str, list[LogEntry]]):
     print_all_official_meetings(official_meetings)
 
     print(f"\n\n\nAmount Of Time This Team Spent Meeting: {time_spent_meeting_minutes} Minutes")
+    
+    readyToContinue()
     
     return
 
