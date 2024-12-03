@@ -17,7 +17,6 @@ def print_graph_c(activity_logs_by_student: dict[str, list[LogEntry]] ):
   minutes_by_date = {}
 
   for key in activity_logs_by_student:
-    print("\n\n\n" + key + "'s Activity Log File:\n\n")
     for log_entry in activity_logs_by_student[key]:
       # convert date, start time, and end time fields to datetime format
       date_convert = datetime.strptime(log_entry.date, '%m/%d/%Y').date().strftime('%Y%m%d')
