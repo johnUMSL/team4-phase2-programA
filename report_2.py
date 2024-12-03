@@ -54,6 +54,10 @@ def generate_report2(teams_log_entries):
     print("Report-2 has beem generated and saved to PhaseThreeReport2.txt file.")"""
     try:
         with open(output_file, "w") as file:
+            file.write("Report 2: Minutes Spent on each Activity by Each Team Member\n"
+            "Class ID: CS 4500\n"
+            "Team 7: Matthew Dobbs, John Garrett, Logan Bessinger, Connor Gilmore, Alewiya Duressa, and Aaron Graham\n"
+            "Report 2 contians activityCode (from 0 to D in hexadecimal order) as first column and total time spent on each activity code in munities\n\n")
             file.write(report_content)
         print("Report-2 has been generated and saved to PhaseThreeReport2.txt file.")
     except Exception as e:
