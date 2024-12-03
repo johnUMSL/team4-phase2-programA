@@ -82,7 +82,7 @@ def main():
   ## report-2 calculate each team memeber timespent by munites for each activityCode and generateReport 
   generate_report2(load_activity_logs(files_matching_pattern))
 
-  ## report 3: minutes worked on each activity by each team member. save reult into dataframe to be used in graph-b
+  ## report 3: minutes worked on each activity by each team member. save reult into dataframe variable to be used in graph-b
   df = create_report_three(compile_activity_log_data(load_activity_logs(files_matching_pattern)))
   
   ## report 4: minutes worked by day of the week

@@ -6,6 +6,7 @@ from activity_log_functions import validate_activity_log_entries
 
 # Function to find a correctly formatted CSV file in the current directory
 def find_csv_files():
+  print("\nValidating number of log files and log file names.....\n") # Once valid input is entered, print statement and continue
   base_path = os.path.abspath(".")  # capture absolute path of the current directory, Resource #3
   csv_files = list(Path(base_path).glob("*.csv")) # List all CSV files in the directory using pathlib's glob method
   regex_pattern = "[A-Z][a-z]*[A-Z][a-z]*Log\.csv" # Capture regex to match CSV file names in the format: "LastnameFirstnameLog.csv", Resource #4
