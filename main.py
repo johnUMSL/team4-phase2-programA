@@ -38,7 +38,7 @@ from csv_functions import *
 from load_logs import load_activity_logs
 from test_print import print_main_data_struct
 from validate_name_course_id import unique_name_check, class_id_check
-from report1 import report1
+from report1 import report1, generate_graph_a
 
 def main():
 
@@ -61,7 +61,9 @@ def main():
 
   ## print_main_data_struct(activity_logs_by_student)
 
-  report1()
+  report1_data = report1()
+  generate_graph_a(report1_data)
+
   readyToContinue()
   print(GOODBYE)
 
